@@ -1,7 +1,5 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import {decorate, observable, action} from 'mobx'
-import {observer} from 'mobx-react'
 
 import './App.css'
 import './main-style.css'
@@ -27,9 +25,5 @@ class App extends React.Component {
     )
   }
 }
-
-decorate(App, {
-  render: observer,
-})
 
 export default App
