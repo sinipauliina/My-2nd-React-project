@@ -1,0 +1,284 @@
+.listitem,
+.form-listitem {
+  display: flex;
+}
+
+.listitem > div:first-child {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  padding: 8px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #76942d;
+}
+
+.listitem > div:last-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.listitem > div:first-child div:first-child {
+  width: 35%;
+  margin-right: 12px;
+  box-sizing: border-box;
+  text-transform: capitalize;
+}
+
+.listitem > div:first-child div:nth-child(2) {
+  width: 25%;
+  margin-right: 12px;
+  box-sizing: border-box;
+  text-transform: capitalize;
+}
+
+.listitem > div:first-child div:last-child {
+  width: 40%;
+  margin-right: 12px;
+  box-sizing: border-box;
+}
+
+.listitem > div:last-child span {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  color: #76942d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.listitem > div:last-child .fa-trash {
+  color: red;
+}
+
+.form-listitem {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-listitem .error-on {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.form-listitem .error-off {
+  display: none;
+}
+
+.form-listitem .form {
+  display: flex;
+  width: 100%;
+}
+
+.form-listitem .form > div:first-child {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  padding: 12px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #76942d;
+}
+
+.form-listitem .form > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  padding: 12px 0;
+  box-sizing: border-box;
+}
+
+.form-listitem .form > div:first-child input:first-child {
+  width: 35%;
+  box-sizing: border-box;
+  text-transform: capitalize;
+}
+
+.form-listitem .form > div:first-child input:nth-child(2) {
+  width: 25%;
+  box-sizing: border-box;
+  text-transform: capitalize;
+}
+
+.form-listitem .form > div:first-child input:last-child {
+  width: 40%;
+  box-sizing: border-box;
+}
+
+.form-listitem input:not([type='submit']) {
+  font-size: 1rem;
+  border: 1px solid #4c650a;
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+
+.form-listitem .form > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.form-listitem .form > div:nth-child(2) span {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  color: #76942d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-listitem .form > div:nth-child(2) .fa-times {
+  color: red;
+}
+
+.form-listitem .form > div:nth-child(2) .fa-check {
+  color: #76942d;
+}
+
+.form-listitem .error-on {
+  color: red;
+}
+
+.form-listitem .error-off {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .listitem {
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px solid #76942d;
+    margin-bottom: 12px;
+  }
+
+  .listitem > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none;
+    width: 100%;
+  }
+
+  .listitem > div:first-child div:first-child,
+  .listitem > div:first-child div:nth-child(2),
+  .listitem > div:first-child div:last-child {
+    width: 100%;
+  }
+
+  .listitem > div:last-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .listitem > div:last-child span {
+    width: auto;
+    padding: 12px;
+  }
+
+  .form-listitem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 12px 0;
+    border-bottom: 1px solid #76942d;
+  }
+
+  .form-listitem > div,
+  .form-listitem > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    width: 100%;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .form-listitem > div:first-child {
+    margin-top: 12px;
+  }
+
+  .form-listitem .error-off {
+    display: none !important;
+  }
+
+  .form-listitem > div:nth-child(2) {
+    width: 100%;
+    padding: 0;
+  }
+
+  .form-listitem > div:first-child input,
+  .form-listitem > div:nth-child(2) input {
+    text-transform: capitalize;
+  }
+
+  .form-listitem > div input,
+  .form-listitem > div:first-child input:last-child {
+    width: 60%;
+  }
+
+  .form-listitem > div:first-child input:nth-child(2) {
+    margin-right: 0;
+  }
+
+  .form-listitem > div:last-child {
+    margin-top: 12px;
+  }
+
+  .form-listitem > div:last-child span {
+    width: auto;
+    justify-content: space-between;
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  .form-listitem > div:last-child .fa-times {
+    color: red;
+  }
+
+  .form-listitem > div:last-child .fa-check {
+    color: #76942d;
+  }
+
+  .form-listitem label {
+    margin-right: 12px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .listitem > div:first-child div:first-child,
+  .listitem > div:first-child div:nth-child(2),
+  .listitem > div:first-child div:last-child {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+
+  .form-listitem {
+    width: 100%;
+  }
+
+  .form-listitem > div,
+  .form-listitem > div:nth-child(2) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .form-listitem > div:last-child {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .form-listitem input[type='text'],
+  .form-listitem input[type='number'],
+  .form-listitem input[type='email'],
+  .form-listitem > div:nth-child(2) input:last-child {
+    width: 100%;
+  }
+}

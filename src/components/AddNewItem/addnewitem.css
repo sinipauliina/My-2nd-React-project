@@ -1,0 +1,65 @@
+.form-addnew {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 16px 0;
+}
+
+.form-addnew .error-on {
+  color: red;
+}
+
+.form-addnew .error-off {
+  display: none;
+}
+
+.form-addnew > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.form-addnew > div:last-of-type {
+  margin-bottom: 20px;
+}
+
+.form-addnew label {
+  margin-right: 12px;
+}
+
+.form-addnew input:not([type='submit']) {
+  font-size: 1rem;
+  border: 1px solid #4c650a;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  width: 200px;
+}
+
+@media screen and (max-width: 767px) {
+  .form-addnew {
+    width: 100%;
+  }
+
+  .form-addnew input:not([type='submit']) {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .form-addnew {
+    width: 100%;
+  }
+
+  .form-addnew > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-addnew input[type='text'],
+  .form-addnew input[type='number'],
+  .form-addnew input[type='email'],
+  .form-addnew input[type='submit'] {
+    width: 100%;
+  }
+}

@@ -1,0 +1,73 @@
+.App-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #5a4f41;
+  padding: 30px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.App-footer .footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 800px;
+}
+
+.App-footer p {
+  display: flex;
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  color: #d3d0b5;
+}
+
+.App-footer p a {
+  margin-left: 6px;
+}
+
+.App-footer p a:link,
+.App-footer p a:visited {
+  color: #a6ba64;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #a6ba64;
+}
+
+.App-footer p a:hover,
+.App-footer p a:active {
+  color: #76942d;
+  font-weight: 600;
+  border-bottom: 1px solid #76942d;
+}
+
+@media screen and (max-width: 959px) {
+  .App-footer {
+    hyphens: auto;
+  }
+
+  footer.App-footer .footer-container {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 429px) {
+  .App-footer .footer-container p {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .App-footer .footer-container a {
+    margin-left: 0;
+  }
+
+  .App-footer p a:link,
+  .App-footer p a:visited,
+  .App-footer p a:hover,
+  .App-footer p a:active {
+    text-decoration: underline;
+    border-bottom: none;
+  }
+}

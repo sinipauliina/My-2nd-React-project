@@ -3,9 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "font-awesome": "^4.7.0",
+    "mobx": "^5.9.4",
+    "mobx-react": "^5.4.3",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-scripts": "2.1.8"
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "uuid": "^3.3.2",
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,7 +22,50 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ],
+      "eol-last": [
+        2,
+        "always"
+      ],
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "max-len": [
+        2,
+        80,
+        2,
+        {
+          "ignoreUrls": true,
+          "ignoreComments": true
+        }
+      ],
+      "quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ],
+      "object-curly-spacing": [
+        2,
+        "never"
+      ],
+      "semi": [
+        2,
+        "never"
+      ],
+      "space-infix-ops": "error"
+    }
   },
   "browserslist": [
     ">0.2%",

@@ -1,4 +1,44 @@
+# My 2nd React project
+
+![React_app_for_Digia_screenshot](https://user-images.githubusercontent.com/19979333/54678547-08c0f700-4b0e-11e9-83e8-feda81123ed6.png)
+
+## About this project
+
+This is a single-page app developed with React. The app is a site for an imaginary dog club that is going to organize an agility competition.
+
+### Features
+
+- The app contains two "pages": a home page and a page for entering the competition ("Ilmoittautuminen").
+- On smaller screens there is a hamburger menu.
+- The app scales to any size screen.
+
+#### Home page
+- On top of the page there is a large hero image with a text.
+- The user can determine the right competition class.
+
+#### Ilmoittautuminen
+- The user can add a new participant via the signup form. Only participants with a valid handler name, dog name and e-mail address are added.
+- There are two lists of participants. Each list contains 5 random participants. Handler names, e-mail addresses and dog names are fetched from two different APIs, and IDs are generated with a library.
+- The user can edit any list row by clicking on an icon.
+- The user can delete any list row by clicking on an icon.
+- The user can sort the lists by clicking on any column header.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### The developer
+
+Sini Pauliina Kolehmainen  
+kolehmainen.sini@outlook.com  
+https://www.sinipauliina.com (only in Finnish)  
+
+I developed this app because I wanted to become a better React developer.
+
+## Installation and running the app
+
+1. Make sure you have Node 8.10.0 or later on your local development machine.
+2. Download this app from GitHub.
+3. On command line go to the project directory.
+4. Run the app: `npm start`
 
 ## Available Scripts
 
@@ -39,30 +79,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [React documentation](https://reactjs.org/)
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App: Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [Create React App: Analyzing the Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [Create React App: Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [Create React App: Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [Create React App: Deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [Create React App: `npm run build` fails to minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

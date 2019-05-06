@@ -1,0 +1,179 @@
+.App-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5a4f41;
+  height: 100px;
+}
+
+.App-header .header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 800px;
+}
+
+.App-header .header-container .sitename,
+.App-header .header-container .sitename a,
+.App-header .header-container .sitename a:link,
+.App-header .header-container .sitename a:visited,
+.App-header .header-container .sitename a:hover,
+.App-header .header-container .sitename a:active {
+  display: flex;
+  font-size: 32px;
+  font-weight: 700;
+  color: #d3d0b5;
+  padding: 20px 0;
+  text-decoration: none;
+}
+
+.App-header .header-container .toggle-button {
+  display: none;
+}
+
+.App-header .header-container .mainmenu {
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.App-header .header-container .mainmenu a:link,
+.App-header .header-container .mainmenu a:visited {
+  color: #a6ba64;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0 6px;
+}
+
+.App-header .header-container .mainmenu a:hover,
+.App-header .header-container .mainmenu a:active {
+  color: #76942d;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #76942d;
+}
+
+.App-header .header-container .mainmenu a .fas {
+  font-weight: 400;
+  padding: 0 6px;
+  font-family: 'FontAwesome';
+}
+
+.App-header .header-container ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+.App-header .header-container .mainmenu a {
+  margin: 0 12px;
+}
+
+.App-header .header-container .mainmenu a:last-child {
+  margin: 0 0 0 12px;
+}
+
+@media screen and (max-width: 959px) {
+  .App-header {
+    hyphens: auto;
+    height: 70px;
+  }
+
+  header.App-header .header-container {
+    width: 80vw;
+  }
+
+  .App-header .header-container .sitename,
+  .App-header .header-container .sitename a,
+  .App-header .header-container .sitename a:link {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .App-header .header-container .toggle-button {
+    display: flex;
+    color: #a6ba64;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .App-header .header-container .mainmenu {
+    display: none;
+  }
+
+  .App-header .header-container .mobilemenu {
+    display: flex;
+    position: absolute;
+    top: 70px;
+    width: 80vw;
+    background-color: #fff;
+    z-index: 1000;
+  }
+
+  .App-header .header-container .mobilemenu ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+
+  .App-header .header-container .mobilemenu ul li {
+    display: flex;
+  }
+
+  .App-header .header-container .mobilemenu a:link,
+  .App-header .header-container .mobilemenu a:visited {
+    display: flex;
+    justify-content: center;
+    color: #a6ba64;
+    font-weight: 600;
+    text-decoration: none;
+    width: 80vw;
+    padding: 10px 0;
+    border-bottom: 1px solid #a6ba64;
+    background-color: #4c650a;
+  }
+
+  .App-header .header-container .mobilemenu a:hover,
+  .App-header .header-container .mobilemenu a:active {
+    color: #d3d0b5;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #76942d;
+  }
+
+  .App-header .header-container .toggle-button .fas {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 767px) and (orientation: landscape) {
+  .App-header {
+    height: 50px;
+  }
+
+  .App-header .header-container .mobilemenu {
+    top: 50px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .App-header {
+    height: 50px;
+  }
+
+  .App-header .header-container .sitename,
+  .App-header .header-container .sitename a,
+  .App-header .header-container .sitename a:link,
+  .App-header .header-container .toggle-button .fas {
+    font-size: 1.5rem;
+  }
+
+  .App-header .header-container .mobilemenu {
+    top: 50px;
+  }
+}
