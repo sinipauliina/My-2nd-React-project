@@ -1,10 +1,10 @@
 # My 2nd React project
 
-![React_app_for_Digia_screenshot](https://user-images.githubusercontent.com/19979333/54678547-08c0f700-4b0e-11e9-83e8-feda81123ed6.png)
+![touhutassut_screenshot_060519](https://user-images.githubusercontent.com/19979333/57236251-4c73af80-702d-11e9-9b2e-e09c9c3a9f81.jpg)
 
 ## About this project
 
-This is a single-page app developed with React. The app is a site for an imaginary dog club that is going to organize an agility competition.
+This is a single-page app developed with React. The app is a site for an imaginary dog club that is going to organize an agility competition. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Features
 
@@ -22,8 +22,6 @@ This is a single-page app developed with React. The app is a site for an imagina
 - The user can edit any list row by clicking on an icon.
 - The user can delete any list row by clicking on an icon.
 - The user can sort the lists by clicking on any column header.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### The developer
 
