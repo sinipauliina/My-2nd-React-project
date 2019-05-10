@@ -9,6 +9,10 @@ import Home from './components/Home/Home'
 import Participants from './components/Participants/Participants'
 import Footer from './components/Footer/Footer'
 
+const ROUTES = {
+  REGISTRATION: '/ilmoittautuminen',
+}
+
 class App extends React.Component {
   render() {
     return (
@@ -17,7 +21,7 @@ class App extends React.Component {
           <Header />
 
           <Route path="/" exact component={Home} />
-          <Route path="/ilmoittautuminen/" component={Participants} />
+          <Route path={ROUTES.REGISTRATION} component={Participants} />
 
           <Footer />
         </Router>
