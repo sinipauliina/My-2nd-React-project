@@ -1,6 +1,11 @@
 {
   "name": "agility-list",
   "version": "0.1.0",
+  "author": {
+    "name": "Sini Pauliina Kolehmainen",
+    "email": "kolehmainen.sini@outlook.com",
+    "url": "https://www.sinipauliina.com"
+  },
   "private": true,
   "dependencies": {
     "eslint-config-react-app": "^3.0.8",
