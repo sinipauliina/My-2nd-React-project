@@ -9,7 +9,7 @@ import List from '../List/List'
 
 import uuidv4 from 'uuid/v4'
 
-class Ilmoittautuminen extends React.Component {
+class Participants extends React.Component {
   // State
   participantsMinit = []
   participantsMedit = []
@@ -176,7 +176,7 @@ class Ilmoittautuminen extends React.Component {
   }
 }
 
-decorate(Ilmoittautuminen, {
+decorate(Participants, {
   participantsMinit: observable,
   participantsMedit: observable,
   componentDidMount: action,
@@ -186,4 +186,4 @@ decorate(Ilmoittautuminen, {
   render: observer,
 })
 
-export default Ilmoittautuminen
+export default Participants

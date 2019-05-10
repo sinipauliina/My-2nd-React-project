@@ -6,7 +6,7 @@ import './main-style.css'
 
 import Header from './components/Header/Header'
 import Home from './components/Home/Home'
-import Ilmoittautuminen from './components/Ilmoittautuminen/Ilmoittautuminen'
+import Participants from './components/Participants/Participants'
 import Footer from './components/Footer/Footer'
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
           <Header />
 
           <Route path="/" exact component={Home} />
-          <Route path="/ilmoittautuminen/" component={Ilmoittautuminen} />
+          <Route path="/ilmoittautuminen/" component={Participants} />
 
           <Footer />
         </Router>
