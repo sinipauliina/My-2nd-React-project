@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 import image from './dog-1.jpg'
 import DetermineClass from '../DetermineClass/DetermineClass'
+import {ROUTES} from '../../constants'
 
 import './home.css'
 import '../../main-style.css'
@@ -53,7 +54,7 @@ class Home extends React.Component {
           </p>
           <ul className="action-links">
             <li>
-              <Link to="/ilmoittautuminen/">Ilmoittaudu!</Link>
+              <Link to={ROUTES.PARTICIPANTS}>Ilmoittaudu!</Link>
             </li>
           </ul>
           <h2>Tarkista koirasi säkäluokka</h2>

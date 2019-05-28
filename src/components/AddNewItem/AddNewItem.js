@@ -1,82 +1,97 @@
 import React from 'react'
-import {decorate, observable, action} from 'mobx'
+import uuidv4 from 'uuid/v4'
 import {observer} from 'mobx-react'
+
+import './addnewitem.css'
+import '../../main-style.css'
 
 import {isHandlerValid} from '../../helpers'
 import {isDogValid} from '../../helpers'
 import {isHeightValid} from '../../helpers'
 import {isEmailValid} from '../../helpers'
 
-import './addnewitem.css'
-import '../../main-style.css'
-
-import uuidv4 from 'uuid/v4'
+import store from '../../store'
 
 class AddNewItem extends React.Component {
-  // State
-  handler = ''
-  dog = ''
-  confirmedHeight = ''
-  email = ''
-  error = false
-  errorMessage = ''
+  state = {
+    handler: '',
+    dog: '',
+    confirmedHeight: '',
+    email: '',
+    error: false,
+    errorMessageWhole: '',
+  }
 
   handleChange = e => {
-    this[e.target.name] = e.target.value
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   isValid = () => {
-    return (
-      isHandlerValid(this.handler) &&
-      isDogValid(this.dog) &&
-      isEmailValid(this.email)
-    )
+    const {handler, dog, email} = this.state
+
+    return isHandlerValid(handler) && isDogValid(dog) && isEmailValid(email)
   }
 
   handleSave = () => {
+    const {handler, dog, confirmedHeight, email} = this.state
+
     if (this.isValid()) {
-      this.props.addItem({
-        handler: this.handler,
-        dog: this.dog,
-        height: this.confirmedHeight,
-        email: this.email,
+      store.addItem({
+        handler,
+        dog,
+        confirmedHeight,
+        email,
         id: uuidv4(),
       })
 
-      // Onko mahdollista saada tekstikentät muuten tyhjiksi lisäämisen jälkeen?
-      this.handler = ''
-      this.dog = ''
-      this.confirmedHeight = ''
-      this.email = ''
-      this.error = false
-      this.errorMessage = ''
+      this.setState({
+        handler: '',
+        dog: '',
+        confirmedHeight: '',
+        email: '',
+        error: false,
+        errorMessage: '',
+      })
     } else {
-      this.error = true
-      this.errorMessage =
-        'Ilmoittautuminen ei onnistunut. ' +
-        (!isHandlerValid(this.handler)
-          ? 'Virheellinen koiran ohjaaja (täytä etunimi ja sukunimi). '
+      const newErrorMessage =
+        store.errorMessage.didNotSucceedReqistration +
+        (!isHandlerValid(handler) ? store.errorMessage.invalidHandler : '') +
+        (!isDogValid(dog) ? store.errorMessage.invalidDog : '') +
+        (!isHeightValid(confirmedHeight)
+          ? store.errorMessage.invalidHeight
           : '') +
-        (!isDogValid(this.dog) ? 'Virheellinen koiran kutsumanimi. ' : '') +
-        (!isHeightValid(this.confirmedHeight)
-          ? 'Virheellinen koiran säkäkorkeus. '
-          : '') +
-        (!isEmailValid(this.email) ? 'Virheellinen sähköpostiosoite.' : '')
+        (!isEmailValid(email) ? store.errorMessage.invalidEmail : '')
+
+      this.setState({
+        error: true,
+        errorMessageWhole: newErrorMessage,
+      })
     }
   }
 
   render() {
+    const {
+      handler,
+      dog,
+      confirmedHeight,
+      email,
+      error,
+      errorMessageWhole,
+    } = this.state
+
     return (
       <div className="form-addnew">
-        <div className={this.error ? 'error-on' : 'error-off'}>
-          {this.errorMessage}
+        <div className={error ? 'error-on' : 'error-off'}>
+          {errorMessageWhole}
         </div>
         <div>
           <label htmlFor="handler">Koiran ohjaaja:</label>
           <input
             type="text"
             name="handler"
-            value={this.handler}
+            value={handler}
             onChange={this.handleChange}
           />
         </div>
@@ -85,7 +100,7 @@ class AddNewItem extends React.Component {
           <input
             type="text"
             name="dog"
-            value={this.dog}
+            value={dog}
             onChange={this.handleChange}
           />
         </div>
@@ -98,7 +113,7 @@ class AddNewItem extends React.Component {
             max="42.99"
             step="0.01"
             name="confirmedHeight"
-            value={this.confirmedHeight}
+            value={confirmedHeight}
             onChange={this.handleChange}
           />
         </div>
@@ -107,7 +122,7 @@ class AddNewItem extends React.Component {
           <input
             type="email"
             name="email"
-            value={this.email}
+            value={email}
             onChange={this.handleChange}
           />
         </div>
@@ -117,16 +132,4 @@ class AddNewItem extends React.Component {
   }
 }
 
-decorate(AddNewItem, {
-  handler: observable,
-  dog: observable,
-  confirmedHeight: observable,
-  email: observable,
-  error: observable,
-  errorMessage: observable,
-  handleChange: action,
-  handleSave: action,
-  render: observer,
-})
-
-export default AddNewItem
+export default observer(AddNewItem)

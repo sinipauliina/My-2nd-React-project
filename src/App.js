@@ -1,17 +1,15 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-import './App.css'
-import './main-style.css'
+import {ROUTES} from './constants'
 
 import Header from './components/Header/Header'
 import Home from './components/Home/Home'
 import Participants from './components/Participants/Participants'
 import Footer from './components/Footer/Footer'
 
-const ROUTES = {
-  REGISTRATION: '/ilmoittautuminen',
-}
+import './App.css'
+import './main-style.css'
 
 class App extends React.Component {
   render() {
@@ -21,7 +19,7 @@ class App extends React.Component {
           <Header />
 
           <Route path="/" exact component={Home} />
-          <Route path={ROUTES.REGISTRATION} component={Participants} />
+          <Route path={ROUTES.PARTICIPANTS} component={Participants} />
 
           <Footer />
         </Router>

@@ -1,26 +1,29 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import {decorate, observable, action} from 'mobx'
-import {observer} from 'mobx-react'
+
+import {ROUTES} from '../../constants'
 
 import './header.css'
 import '../../main-style.css'
 import 'font-awesome/css/font-awesome.min.css'
 
 class Header extends React.Component {
-  // State
-  mobileMenu = false
+  state = {
+    mobileMenu: false,
+  }
 
   handleClick = () => {
-    const currentMobileMenuState = !this.mobileMenu
-    this.mobileMenu = currentMobileMenuState
+    const currentMobileMenuState = !this.state.mobileMenu
+    this.setState({mobileMenu: currentMobileMenuState})
   }
 
   handleClickLink = () => {
-    this.mobileMenu = false
+    this.setState({mobileMenu: false})
   }
 
   render() {
+    const {mobileMenu} = this.state
+
     return (
       <header className="App-header">
         <div className="header-container">
@@ -32,7 +35,7 @@ class Header extends React.Component {
           <div className="toggle-button" onClick={this.handleClick}>
             <span className="fas fa-bars" />
           </div>
-          <nav className={this.mobileMenu ? 'mobilemenu' : 'mainmenu'}>
+          <nav className={mobileMenu ? 'mobilemenu' : 'mainmenu'}>
             <ul>
               <li>
                 <Link to="/" onClick={this.handleClickLink}>
@@ -40,7 +43,7 @@ class Header extends React.Component {
                 </Link>
               </li>
               <li>
-                <Link to="/ilmoittautuminen/" onClick={this.handleClickLink}>
+                <Link to={ROUTES.PARTICIPANTS} onClick={this.handleClickLink}>
                   Ilmoittautuminen
                 </Link>
               </li>
@@ -51,12 +54,5 @@ class Header extends React.Component {
     )
   }
 }
-
-decorate(Header, {
-  mobileMenu: observable,
-  handleClick: action,
-  handleClickLink: action,
-  render: observer,
-})
 
 export default Header

@@ -1,5 +1,4 @@
 import React from 'react'
-import {decorate, observable, action} from 'mobx'
 import {observer} from 'mobx-react'
 
 import './listitem.css'
@@ -8,22 +7,25 @@ import '../../main-style.css'
 import {isHandlerValid} from '../../helpers'
 import {isDogValid} from '../../helpers'
 import {isEmailValid} from '../../helpers'
-import DesktopComponent from './DesktopComponent'
-import MobileComponent from './MobileComponent'
+import ListItemDesktop from './ListItemDesktop'
+import ListItemMobile from './ListItemMobile'
+
+import store from '../../store'
 
 class ListItem extends React.Component {
-  // State
-  windowWidth = window.innerWidth
-  isInEditMode = false
-  error = false
-  errorMessage = ''
-  handler = this.props.participant.handler
-  dog = this.props.participant.dog
-  email = this.props.participant.email
-  id = this.props.participant.id
+  state = {
+    windowWidth: window.innerWidth,
+    isInEditMode: false,
+    error: false,
+    errorMessageWhole: '',
+    handler: this.props.participant.handler,
+    dog: this.props.participant.dog,
+    email: this.props.participant.email,
+    id: this.props.participant.id,
+  }
 
   handleResize = () => {
-    this.windowWidth = window.innerWidth
+    this.setState({windowWidth: window.innerWidth})
   }
 
   componentDidMount = () => {
@@ -35,108 +37,105 @@ class ListItem extends React.Component {
   }
 
   handleChange = e => {
-    this[e.target.name] = e.target.value
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleCancel = () => {
-    this.isInEditMode = false
-    this.error = false
-    this.errorMessage = ''
-    this.handler = this.props.participant.handler
-    this.dog = this.props.participant.dog
-    this.email = this.props.participant.email
-    this.id = this.props.participant.id
+    this.setState({
+      isInEditMode: false,
+      error: false,
+      errorMessageWhole: '',
+      handler: this.props.participant.handler,
+      dog: this.props.participant.dog,
+      email: this.props.participant.email,
+      id: this.props.participant.id,
+    })
   }
 
   isValid = () => {
-    return (
-      isHandlerValid(this.handler) &&
-      isDogValid(this.dog) &&
-      isEmailValid(this.email)
-    )
+    const {handler, dog, email} = this.state
+
+    return isHandlerValid(handler) && isDogValid(dog) && isEmailValid(email)
   }
 
   handleSave = () => {
+    const {handler, dog, email, id} = this.state
+
     if (this.isValid()) {
-      this.props.editItem({
-        handler: this.handler,
-        dog: this.dog,
-        email: this.email,
-        id: this.id,
+      store.editItem({
+        handler,
+        dog,
+        email,
+        id,
       })
 
-      this.error = false
-      this.errorMessage = ''
-      this.isInEditMode = false
+      this.setState({
+        error: false,
+        errorMessageWhole: '',
+        isInEditMode: false,
+      })
     } else {
-      this.error = true
-      this.errorMessage =
-        'Muokkaus ei onnistunut. ' +
-        (!isHandlerValid(this.handler)
-          ? 'Virheellinen koiran ohjaaja (täytä etunimi ja sukunimi). '
-          : '') +
-        (!isDogValid(this.dog) ? 'Virheellinen koiran kutsumanimi. ' : '') +
-        (!isEmailValid(this.email) ? 'Virheellinen sähköpostiosoite.' : '')
+      const newErrorMessage =
+        store.errorMessage.didNotSucceedEditing +
+        (!isHandlerValid(handler) ? store.errorMessage.invalidHandler : '') +
+        (!isDogValid(dog) ? store.errorMessage.invalidDog : '') +
+        (!isEmailValid(email) ? store.errorMessage.invalidEmail : '')
+
+      this.setState({
+        error: true,
+        errorMessageWhole: newErrorMessage,
+      })
     }
   }
 
   changeEditMode = () => {
-    this.isInEditMode = true
+    this.setState({isInEditMode: true})
   }
 
   render() {
-    const {removeItem} = this.props
+    const {
+      handler,
+      dog,
+      email,
+      id,
+      windowWidth,
+      isInEditMode,
+      error,
+      errorMessageWhole,
+    } = this.state
 
-    return this.windowWidth >= 767 ? (
-      <DesktopComponent
-        handler={this.handler}
-        dog={this.dog}
-        email={this.email}
-        id={this.id}
-        isInEditMode={this.isInEditMode}
-        error={this.error}
-        errorMessage={this.errorMessage}
+    return windowWidth >= 767 ? (
+      <ListItemDesktop
+        handler={handler}
+        dog={dog}
+        email={email}
+        id={id}
+        isInEditMode={isInEditMode}
+        error={error}
+        errorMessageWhole={errorMessageWhole}
         handleChange={this.handleChange}
         handleCancel={this.handleCancel}
         handleSave={this.handleSave}
         changeEditMode={this.changeEditMode}
-        removeItem={removeItem}
       />
     ) : (
-      <MobileComponent
-        handler={this.handler}
-        dog={this.dog}
-        email={this.email}
-        id={this.id}
-        isInEditMode={this.isInEditMode}
-        error={this.error}
-        errorMessage={this.errorMessage}
+      <ListItemMobile
+        handler={handler}
+        dog={dog}
+        email={email}
+        id={id}
+        isInEditMode={isInEditMode}
+        error={error}
+        errorMessageWhole={errorMessageWhole}
         handleChange={this.handleChange}
         handleCancel={this.handleCancel}
         handleSave={this.handleSave}
         changeEditMode={this.changeEditMode}
-        removeItem={removeItem}
       />
     )
   }
 }
 
-decorate(ListItem, {
-  handler: observable,
-  dog: observable,
-  email: observable,
-  id: observable,
-  windowWidth: observable,
-  isInEditMode: observable,
-  error: observable,
-  errorMessage: observable,
-  handleResize: action,
-  componentDidMount: action,
-  componentWillUnmount: action,
-  changeEditMode: action,
-  handleCancel: action,
-  handleSave: action,
-  render: observer,
-})
-
-export default ListItem
+export default observer(ListItem)

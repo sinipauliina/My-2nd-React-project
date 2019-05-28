@@ -1,5 +1,4 @@
 import React from 'react'
-import {decorate, observable} from 'mobx'
 import {observer} from 'mobx-react'
 
 import './list.css'
@@ -7,58 +6,55 @@ import '../../main-style.css'
 
 import ListItem from '../ListItem/ListItem'
 
+const headerKeys = {
+  handler: 'handler',
+  dog: 'dog',
+  email: 'email',
+}
+
 class List extends React.Component {
-  // State
-  headerKeys = {
-    handler: 'handler',
-    dog: 'dog',
-    email: 'email',
+  state = {
+    sortKey: headerKeys.handler,
   }
-  sortKey = this.headerKeys.handler
 
   handleSort = e => {
-    this.sortKey = e.target.id
+    this.setState({sortKey: e.target.id})
   }
 
   render() {
-    const {participants, changeEditMode, editItem, removeItem} = this.props
+    const {participants} = this.props
+    const {sortKey} = this.state
 
     const sortedParticipants = [...participants].sort((a, b) =>
-      a[this.sortKey].localeCompare(b[this.sortKey])
+      a[sortKey].localeCompare(b[sortKey])
     )
 
     return (
       <div className="list">
         <div className="list_header">
-          <div id={this.headerKeys.handler} onClick={this.handleSort}>
+          <div id={headerKeys.handler} onClick={this.handleSort}>
             Koiran ohjaaja{' '}
             <span
               className={
-                this.sortKey === this.headerKeys.handler
-                  ? 'arrow-on'
-                  : 'arrow-off'
+                sortKey === headerKeys.handler ? 'arrow-on' : 'arrow-off'
               }
             >
               &darr;
             </span>
           </div>
-          <div id={this.headerKeys.dog} onClick={this.handleSort}>
+          <div id={headerKeys.dog} onClick={this.handleSort}>
             Koira{' '}
             <span
-              className={
-                this.sortKey === this.headerKeys.dog ? 'arrow-on' : 'arrow-off'
-              }
+              className={sortKey === headerKeys.dog ? 'arrow-on' : 'arrow-off'}
             >
               &darr;
             </span>
           </div>
-          <div id={this.headerKeys.email} onClick={this.handleSort}>
+          <div id={headerKeys.email} onClick={this.handleSort}>
             Sähköpostiosoite{' '}
             <span
               className={
-                this.sortKey === this.headerKeys.email
-                  ? 'arrow-on'
-                  : 'arrow-off'
+                sortKey === headerKeys.email ? 'arrow-on' : 'arrow-off'
               }
             >
               &darr;
@@ -66,23 +62,11 @@ class List extends React.Component {
           </div>
         </div>
         {sortedParticipants.map(x => (
-          <ListItem
-            key={x.id}
-            participant={x}
-            changeEditMode={changeEditMode}
-            editItem={editItem}
-            removeItem={removeItem}
-          />
+          <ListItem key={x.id} participant={x} />
         ))}
       </div>
     )
   }
 }
 
-decorate(List, {
-  headerKeys: observable,
-  sortKey: observable,
-  render: observer,
-})
-
-export default List
+export default observer(List)

@@ -1,32 +1,33 @@
 import React from 'react'
-import {decorate} from 'mobx'
 import {observer} from 'mobx-react'
 
 import './listitem.css'
 import '../../main-style.css'
 
-class DesktopComponent extends React.Component {
+import store from '../../store'
+
+class ListItemDesktop extends React.Component {
   render() {
     const {
       isInEditMode,
       error,
-      errorMessage,
+      errorMessageWhole,
       handler,
       dog,
       email,
       id,
-    } = this.props
-    const {
       handleCancel,
       handleSave,
       changeEditMode,
-      removeItem,
       handleChange,
     } = this.props
+    const {removeItem} = store
 
     return isInEditMode ? (
       <div className="form-listitem">
-        <div className={error ? 'error-on' : 'error-off'}>{errorMessage}</div>
+        <div className={error ? 'error-on' : 'error-off'}>
+          {errorMessageWhole}
+        </div>
         <div className="form">
           <div>
             <input
@@ -73,8 +74,4 @@ class DesktopComponent extends React.Component {
   }
 }
 
-decorate(DesktopComponent, {
-  render: observer,
-})
-
-export default DesktopComponent
+export default observer(ListItemDesktop)

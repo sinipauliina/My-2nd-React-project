@@ -1,5 +1,5 @@
 import React from 'react'
-import {decorate, observable, action} from 'mobx'
+import validator from 'validator'
 import {observer} from 'mobx-react'
 
 import DisplayAnswer from './DisplayAnswer'
@@ -7,55 +7,61 @@ import DisplayAnswer from './DisplayAnswer'
 import './determineclass.css'
 import '../../main-style.css'
 
-import validator from 'validator'
+import store from '../../store'
 
 class DetermineClass extends React.Component {
-  // State
-  height = ''
-  answer = ''
-  answerClass = ''
-  showAnswer = false
+  state = {
+    height: '',
+    answer: '',
+    answerClass: '',
+    showAnswer: false,
+  }
 
   handleChange = e => {
-    this[e.target.name] = e.target.value
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleAnswer = () => {
-    if (this.height >= 13 && this.height < 28) {
-      this.answer =
-        'Koirasi säkäkorkeus on ' +
-        this.height +
-        ' cm eli se on pikkumini. ' +
-        'Se voi osallistua näissä kisoissa miniluokkaan.'
-      this.answerClass = 'pikkumini'
-      this.showAnswer = true
-    } else if (this.height >= 13 && this.height < 35) {
-      this.answer =
-        'Koirasi säkäkorkeus on ' +
-        this.height +
-        ' cm eli se on mini. Se voi osallistua näissä kisoissa miniluokkaan.'
-      this.answerClass = 'mini'
-      this.showAnswer = true
-    } else if (this.height >= 35 && this.height <= 42.99) {
-      this.answer =
-        'Koirasi säkäkorkeus on ' +
-        this.height +
-        ' cm eli se on medi. Se voi osallistua näissä kisoissa mediluokkaan.'
-      this.answerClass = 'medi'
-      this.showAnswer = true
-    } else if (validator.isEmpty(this.height)) {
-      this.answer = 'Et syöttänyt kelvollista lukua. :('
-      this.answerClass = 'other'
-      this.showAnswer = true
-      console.log('luku: ' + this.height)
+    const {height} = this.state
+
+    if (height >= 13 && height < 28) {
+      this.setState({
+        answer: store.answer.smallMini,
+        answerClass: 'smallMini',
+        showAnswer: true,
+      })
+    } else if (height >= 13 && height < 35) {
+      this.setState({
+        answer: store.answer.mini,
+        answerClass: 'mini',
+        showAnswer: true,
+      })
+    } else if (height >= 35 && height <= 42.99) {
+      this.setState({
+        answer: store.answer.medi,
+        answerClass: 'medi',
+        showAnswer: true,
+      })
+    } else if (validator.isEmpty(height)) {
+      this.setState({
+        answer: store.answer.invalidNumber,
+        answerClass: 'other',
+        showAnswer: true,
+      })
     } else {
-      this.answer = 'Koirasi on väärän kokoinen näihin kisoihin. :('
-      this.answerClass = 'other'
-      this.showAnswer = true
+      this.setState({
+        answer: store.answer.invalidHeight,
+        answerClass: 'other',
+        showAnswer: true,
+      })
     }
   }
 
   render() {
+    const {height, answer, answerClass, showAnswer} = this.state
+
     return (
       <div>
         <p>
@@ -72,7 +78,7 @@ class DetermineClass extends React.Component {
             max="42.99"
             step="0.01"
             name="height"
-            value={this.height}
+            value={height}
             onChange={this.handleChange}
           />
           <input
@@ -82,23 +88,13 @@ class DetermineClass extends React.Component {
           />
         </div>
         <DisplayAnswer
-          answer={this.answer}
-          answerClass={this.answerClass}
-          showAnswer={this.showAnswer}
+          answer={answer}
+          answerClass={answerClass}
+          showAnswer={showAnswer}
         />
       </div>
     )
   }
 }
 
-decorate(DetermineClass, {
-  height: observable,
-  answer: observable,
-  answerClass: observable,
-  showAnswer: observable,
-  handleChange: action,
-  handleAnswer: action,
-  render: observer,
-})
-
-export default DetermineClass
+export default observer(DetermineClass)
