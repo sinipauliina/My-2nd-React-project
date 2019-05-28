@@ -187,6 +187,4 @@ decorate(store, {
   removeItem: action,
 })
 
-// Onko tämä oikein? Miten muuten välttää tekemästä new store joka tiedostossa,
-// jos ei halua käyttää propseja, vaan importtaa storen suoraan?
 export default new store()

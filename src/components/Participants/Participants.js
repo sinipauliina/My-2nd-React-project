@@ -10,8 +10,13 @@ import store from '../../store'
 
 class Participants extends React.Component {
   componentDidMount = () => {
-    store.fetchParticipantsMini()
-    store.fetchParticipantsMedi()
+    if (store.participantsMini.length === 0) {
+      store.fetchParticipantsMini()
+    }
+
+    if (store.participantsMedi.length === 0) {
+      store.fetchParticipantsMedi()
+    }
   }
 
   render() {
