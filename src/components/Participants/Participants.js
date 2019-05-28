@@ -10,12 +10,12 @@ import store from '../../store'
 
 class Participants extends React.Component {
   componentDidMount = () => {
-    store.fetchParticipantsMinit()
-    store.fetchParticipantsMedit()
+    store.fetchParticipantsMini()
+    store.fetchParticipantsMedi()
   }
 
   render() {
-    const {participantsMinit, participantsMedit} = store
+    const {participantsMini, participantsMedi} = store
 
     return (
       <main className="App-main">
@@ -27,13 +27,13 @@ class Participants extends React.Component {
             Tämä luokka on tarkoitettu koirille, joiden säkäkorkeus on alle 35
             cm. Esteet ovat tässä luokassa 20 - 30 cm korkeita.
           </p>
-          <List participants={participantsMinit} />
+          <List participants={participantsMini} />
           <h2>Medit</h2>
           <p>
             Tämä luokka on tarkoitettu koirille, joiden säkäkorkeus on 35 -
             42,99 cm. Esteet ovat tässä luokassa 30 - 40 cm korkeita.
           </p>
-          <List participants={participantsMedit} />
+          <List participants={participantsMedi} />
         </div>
       </main>
     )

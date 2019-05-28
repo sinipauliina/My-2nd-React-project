@@ -2,8 +2,8 @@ import {decorate, observable, action} from 'mobx'
 import uuidv4 from 'uuid/v4'
 
 class store {
-  participantsMinit = []
-  participantsMedit = []
+  participantsMini = []
+  participantsMedi = []
 
   // AddNewItem.js, ListItem.js
   errorMessage = {
@@ -26,7 +26,7 @@ class store {
   }
 
   // Participants.js
-  fetchParticipantsMinit = () => {
+  fetchParticipantsMini = () => {
     Promise.all([
       fetch('https://randomuser.me/api/?results=5&inc=name,email&nat=fi').then(
         response => response.json()
@@ -34,10 +34,10 @@ class store {
       fetch(
         'https://pokeapi.co/api/v2/pokemon/?limit=5&offset=12&inc=name'
       ).then(response => response.json()),
-    ]).then(data => this.setParticipantsMinit(data))
+    ]).then(data => this.setParticipantsMini(data))
   }
 
-  setParticipantsMinit = data => {
+  setParticipantsMini = data => {
     const dataHandlers = data[0].results.map((participant, i) => {
       return {
         ...participant,
@@ -54,7 +54,7 @@ class store {
     })
 
     for (let i = 0; i < dataHandlers.length; i++) {
-      this.participantsMinit.push({
+      this.participantsMini.push({
         handler: dataHandlers[i].handler,
         dog: dataDogs[i].name,
         email: dataHandlers[i].email,
@@ -64,7 +64,7 @@ class store {
   }
 
   // Participants.js
-  fetchParticipantsMedit = () => {
+  fetchParticipantsMedi = () => {
     Promise.all([
       fetch('https://randomuser.me/api/?results=5&inc=name,email&nat=fi').then(
         response => response.json()
@@ -72,10 +72,10 @@ class store {
       fetch(
         'https://pokeapi.co/api/v2/pokemon/?limit=5&offset=55&inc=name'
       ).then(response => response.json()),
-    ]).then(data => this.setParticipantsMedit(data))
+    ]).then(data => this.setParticipantsMedi(data))
   }
 
-  setParticipantsMedit = data => {
+  setParticipantsMedi = data => {
     const dataHandlers = data[0].results.map((participant, i) => {
       return {
         ...participant,
@@ -92,7 +92,7 @@ class store {
     })
 
     for (let i = 0; i < dataHandlers.length; i++) {
-      this.participantsMedit.push({
+      this.participantsMedi.push({
         handler: dataHandlers[i].handler,
         dog: dataDogs[i].name,
         email: dataHandlers[i].email,
@@ -102,13 +102,13 @@ class store {
   }
 
   addItem = newParticipant => {
-    const {participantsMinit, participantsMedit} = this
+    const {participantsMini, participantsMedi} = this
 
     if (
       newParticipant.confirmedHeight >= 13 &&
       newParticipant.confirmedHeight < 35
     ) {
-      participantsMinit.push({
+      participantsMini.push({
         handler: newParticipant.handler,
         dog: newParticipant.dog,
         height: newParticipant.confirmedHeight,
@@ -116,7 +116,7 @@ class store {
         id: newParticipant.id,
       })
     } else {
-      participantsMedit.push({
+      participantsMedi.push({
         handler: newParticipant.handler,
         dog: newParticipant.dog,
         height: newParticipant.confirmedHeight,
@@ -127,12 +127,12 @@ class store {
   }
 
   editItem = editedParticipant => {
-    const {participantsMinit, participantsMedit} = this
+    const {participantsMini, participantsMedi} = this
 
-    let index = participantsMinit.findIndex(x => x.id === editedParticipant.id)
+    let index = participantsMini.findIndex(x => x.id === editedParticipant.id)
 
     if (index > -1) {
-      participantsMinit[index] = {
+      participantsMini[index] = {
         handler: editedParticipant.handler,
         dog: editedParticipant.dog,
         email: editedParticipant.email,
@@ -141,9 +141,9 @@ class store {
 
       index = -1
     } else {
-      index = participantsMedit.findIndex(x => x.id === editedParticipant.id)
+      index = participantsMedi.findIndex(x => x.id === editedParticipant.id)
 
-      participantsMedit[index] = {
+      participantsMedi[index] = {
         handler: editedParticipant.handler,
         dog: editedParticipant.dog,
         email: editedParticipant.email,
@@ -155,33 +155,33 @@ class store {
   }
 
   removeItem = id => {
-    const index = this.participantsMinit.findIndex(x => x.id === id)
+    const index = this.participantsMini.findIndex(x => x.id === id)
 
     if (index > -1) {
-      let filteredParticipantsMinit = this.participantsMinit.filter(
+      let filteredParticipantsMini = this.participantsMini.filter(
         participant => participant.id !== id
       )
 
-      this.participantsMinit = filteredParticipantsMinit
+      this.participantsMini = filteredParticipantsMini
     } else {
-      let filteredParticipantsMedit = this.participantsMedit.filter(
+      let filteredParticipantsMedi = this.participantsMedi.filter(
         participant => participant.id !== id
       )
 
-      this.participantsMedit = filteredParticipantsMedit
+      this.participantsMedi = filteredParticipantsMedi
     }
   }
 }
 
 decorate(store, {
-  participantsMinit: observable,
-  participantsMedit: observable,
+  participantsMini: observable,
+  participantsMedi: observable,
   errorMessage: observable,
   answer: observable,
-  fetchParticipantsMinit: action,
-  setParticipantsMinit: action,
-  fetchParticipantsMedit: action,
-  setParticipantsMedit: action,
+  fetchParticipantsMini: action,
+  setParticipantsMini: action,
+  fetchParticipantsMedi: action,
+  setParticipantsMedi: action,
   addItem: action,
   editItem: action,
   removeItem: action,
