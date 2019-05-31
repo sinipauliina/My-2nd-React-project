@@ -36,7 +36,7 @@ index.js
       |-- List.js  
         |-- ListItem.js  
           |-- ListItemDesktop.js  
-          |-- ListItemMobile.js  
+          |-- ListItemMobile.js
   |-- Footer.js
 
 ### The developer
