@@ -8,22 +8,20 @@ import '../../main-style.css'
 
 class DisplayAnswer extends React.Component {
   render() {
-    const {answer, answerClass, showAnswer} = this.props
+    const {answer, answerClass} = this.props
 
     return (
-      showAnswer && (
-        <div className="answer">
-          <h3>Vastaus</h3>
-          <p>{answer}</p>
-          {answerClass !== 'other' && (
-            <ul className="action-links">
-              <li>
-                <Link to={ROUTES.PARTICIPANTS}>Ilmoittaudu!</Link>
-              </li>
-            </ul>
-          )}
-        </div>
-      )
+      <div className="answer">
+        <h3>Vastaus</h3>
+        <p>{answer}</p>
+        {answerClass !== 'other' && (
+          <ul className="action-links">
+            <li>
+              <Link to={ROUTES.PARTICIPANTS}>Ilmoittaudu!</Link>
+            </li>
+          </ul>
+        )}
+      </div>
     )
   }
 }

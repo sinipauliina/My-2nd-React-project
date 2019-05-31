@@ -2,30 +2,14 @@ import {decorate, observable, action} from 'mobx'
 import uuidv4 from 'uuid/v4'
 
 class store {
+  constructor() {
+    this.fetchParticipantsMini()
+    this.fetchParticipantsMedi()
+  }
+
   participantsMini = []
   participantsMedi = []
 
-  // AddNewItem.js, ListItem.js
-  errorMessage = {
-    didNotSucceedReqistration: 'Ilmoittautuminen ei onnistunut. ',
-    didNotSucceedEditing: 'Muokkaus ei onnistunut. ',
-    invalidHandler: 'Virheellinen koiran ohjaaja (täytä etunimi ja sukunimi). ',
-    invalidDog: 'Virheellinen koiran kutsumanimi. ',
-    invalidHeight: 'Virheellinen koiran säkäkorkeus. ',
-    invalidEmail: 'Virheellinen sähköpostiosoite.',
-  }
-
-  // DetermineClass.js
-  answer = {
-    smallMini:
-      'Koirasi on pikkumini. Se voi osallistua näissä kisoissa miniluokkaan.',
-    mini: 'Koirasi on mini. Se voi osallistua näissä kisoissa miniluokkaan.',
-    medi: 'Koirasi on medi. Se voi osallistua näissä kisoissa mediluokkaan.',
-    invalidNumber: 'Et syöttänyt kelvollista lukua. :(',
-    invalidHeight: 'Koirasi on väärän kokoinen näihin kisoihin. :(',
-  }
-
-  // Participants.js
   fetchParticipantsMini = () => {
     Promise.all([
       fetch('https://randomuser.me/api/?results=5&inc=name,email&nat=fi').then(
@@ -53,17 +37,20 @@ class store {
       }
     })
 
+    let newParticipantsMini = []
+
     for (let i = 0; i < dataHandlers.length; i++) {
-      this.participantsMini.push({
+      newParticipantsMini.push({
         handler: dataHandlers[i].handler,
         dog: dataDogs[i].name,
         email: dataHandlers[i].email,
         id: uuidv4(i),
       })
     }
+
+    this.participantsMini = newParticipantsMini
   }
 
-  // Participants.js
   fetchParticipantsMedi = () => {
     Promise.all([
       fetch('https://randomuser.me/api/?results=5&inc=name,email&nat=fi').then(
@@ -91,38 +78,50 @@ class store {
       }
     })
 
+    let newParticipantsMedi = []
+
     for (let i = 0; i < dataHandlers.length; i++) {
-      this.participantsMedi.push({
+      newParticipantsMedi.push({
         handler: dataHandlers[i].handler,
         dog: dataDogs[i].name,
         email: dataHandlers[i].email,
         id: uuidv4(i),
       })
     }
+
+    this.participantsMedi = newParticipantsMedi
   }
 
   addItem = newParticipant => {
-    const {participantsMini, participantsMedi} = this
-
     if (
       newParticipant.confirmedHeight >= 13 &&
       newParticipant.confirmedHeight < 35
     ) {
-      participantsMini.push({
-        handler: newParticipant.handler,
-        dog: newParticipant.dog,
-        height: newParticipant.confirmedHeight,
-        email: newParticipant.email,
-        id: newParticipant.id,
-      })
+      let newParticipantsMini = [
+        ...this.participantsMini,
+        {
+          handler: newParticipant.handler,
+          dog: newParticipant.dog,
+          height: newParticipant.confirmedHeight,
+          email: newParticipant.email,
+          id: newParticipant.id,
+        },
+      ]
+
+      this.participantsMini = newParticipantsMini
     } else {
-      participantsMedi.push({
-        handler: newParticipant.handler,
-        dog: newParticipant.dog,
-        height: newParticipant.confirmedHeight,
-        email: newParticipant.email,
-        id: newParticipant.id,
-      })
+      let newParticipantsMedi = [
+        ...this.participantsMedi,
+        {
+          handler: newParticipant.handler,
+          dog: newParticipant.dog,
+          height: newParticipant.confirmedHeight,
+          email: newParticipant.email,
+          id: newParticipant.id,
+        },
+      ]
+
+      this.participantsMedi = newParticipantsMedi
     }
   }
 
@@ -176,8 +175,6 @@ class store {
 decorate(store, {
   participantsMini: observable,
   participantsMedi: observable,
-  errorMessage: observable,
-  answer: observable,
   fetchParticipantsMini: action,
   setParticipantsMini: action,
   fetchParticipantsMedi: action,

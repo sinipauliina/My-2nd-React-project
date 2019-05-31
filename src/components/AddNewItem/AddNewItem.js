@@ -10,6 +10,7 @@ import {isDogValid} from '../../helpers'
 import {isHeightValid} from '../../helpers'
 import {isEmailValid} from '../../helpers'
 
+import {ERROR_MESSAGE} from '../../constants'
 import store from '../../store'
 
 class AddNewItem extends React.Component {
@@ -36,6 +37,13 @@ class AddNewItem extends React.Component {
 
   handleSave = () => {
     const {handler, dog, confirmedHeight, email} = this.state
+    const {
+      DID_NOT_SUCCEED_REGISTRATION,
+      INVALID_HANDLER,
+      INVALID_DOG,
+      INVALID_HEIGHT,
+      INVALID_EMAIL,
+    } = ERROR_MESSAGE
 
     if (this.isValid()) {
       store.addItem({
@@ -56,13 +64,11 @@ class AddNewItem extends React.Component {
       })
     } else {
       const newErrorMessage =
-        store.errorMessage.didNotSucceedReqistration +
-        (!isHandlerValid(handler) ? store.errorMessage.invalidHandler : '') +
-        (!isDogValid(dog) ? store.errorMessage.invalidDog : '') +
-        (!isHeightValid(confirmedHeight)
-          ? store.errorMessage.invalidHeight
-          : '') +
-        (!isEmailValid(email) ? store.errorMessage.invalidEmail : '')
+        DID_NOT_SUCCEED_REGISTRATION +
+        (!isHandlerValid(handler) ? INVALID_HANDLER : '') +
+        (!isDogValid(dog) ? INVALID_DOG : '') +
+        (!isHeightValid(confirmedHeight) ? INVALID_HEIGHT : '') +
+        (!isEmailValid(email) ? INVALID_EMAIL : '')
 
       this.setState({
         error: true,
@@ -80,6 +86,7 @@ class AddNewItem extends React.Component {
       error,
       errorMessageWhole,
     } = this.state
+    const {handleChange, handleSave} = this
 
     return (
       <div className="form-addnew">
@@ -92,17 +99,12 @@ class AddNewItem extends React.Component {
             type="text"
             name="handler"
             value={handler}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
           <label htmlFor="dog">Koiran kutsumanimi:</label>
-          <input
-            type="text"
-            name="dog"
-            value={dog}
-            onChange={this.handleChange}
-          />
+          <input type="text" name="dog" value={dog} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="confirmedHeight">Koiran säkäkorkeus:</label>
@@ -114,7 +116,7 @@ class AddNewItem extends React.Component {
             step="0.01"
             name="confirmedHeight"
             value={confirmedHeight}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -123,10 +125,10 @@ class AddNewItem extends React.Component {
             type="email"
             name="email"
             value={email}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </div>
-        <input type="submit" value="Ilmoittaudu" onClick={this.handleSave} />
+        <input type="submit" value="Ilmoittaudu" onClick={handleSave} />
       </div>
     )
   }

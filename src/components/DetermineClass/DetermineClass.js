@@ -7,7 +7,7 @@ import DisplayAnswer from './DisplayAnswer'
 import './determineclass.css'
 import '../../main-style.css'
 
-import store from '../../store'
+import {ANSWER} from '../../constants'
 
 class DetermineClass extends React.Component {
   state = {
@@ -25,34 +25,35 @@ class DetermineClass extends React.Component {
 
   handleAnswer = () => {
     const {height} = this.state
+    const {SMALL_MINI, MINI, MEDI, INVALID_HEIGHT, INVALID_NUMBER} = ANSWER
 
     if (height >= 13 && height < 28) {
       this.setState({
-        answer: store.answer.smallMini,
+        answer: SMALL_MINI,
         answerClass: 'smallMini',
         showAnswer: true,
       })
     } else if (height >= 13 && height < 35) {
       this.setState({
-        answer: store.answer.mini,
+        answer: MINI,
         answerClass: 'mini',
         showAnswer: true,
       })
     } else if (height >= 35 && height <= 42.99) {
       this.setState({
-        answer: store.answer.medi,
+        answer: MEDI,
         answerClass: 'medi',
         showAnswer: true,
       })
     } else if (validator.isEmpty(height)) {
       this.setState({
-        answer: store.answer.invalidNumber,
+        answer: INVALID_HEIGHT,
         answerClass: 'other',
         showAnswer: true,
       })
     } else {
       this.setState({
-        answer: store.answer.invalidHeight,
+        answer: INVALID_NUMBER,
         answerClass: 'other',
         showAnswer: true,
       })
@@ -61,6 +62,7 @@ class DetermineClass extends React.Component {
 
   render() {
     const {height, answer, answerClass, showAnswer} = this.state
+    const {handleChange, handleAnswer} = this
 
     return (
       <div>
@@ -79,19 +81,17 @@ class DetermineClass extends React.Component {
             step="0.01"
             name="height"
             value={height}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
           <input
             type="submit"
             value="Määritä säkäluokka!"
-            onClick={this.handleAnswer}
+            onClick={handleAnswer}
           />
         </div>
-        <DisplayAnswer
-          answer={answer}
-          answerClass={answerClass}
-          showAnswer={showAnswer}
-        />
+        {showAnswer && (
+          <DisplayAnswer answer={answer} answerClass={answerClass} />
+        )}
       </div>
     )
   }

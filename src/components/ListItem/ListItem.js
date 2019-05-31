@@ -10,6 +10,7 @@ import {isEmailValid} from '../../helpers'
 import ListItemDesktop from './ListItemDesktop'
 import ListItemMobile from './ListItemMobile'
 
+import {ERROR_MESSAGE} from '../../constants'
 import store from '../../store'
 
 class ListItem extends React.Component {
@@ -43,14 +44,16 @@ class ListItem extends React.Component {
   }
 
   handleCancel = () => {
+    const {handler, dog, email, id} = this.props.participant
+
     this.setState({
       isInEditMode: false,
       error: false,
       errorMessageWhole: '',
-      handler: this.props.participant.handler,
-      dog: this.props.participant.dog,
-      email: this.props.participant.email,
-      id: this.props.participant.id,
+      handler: handler,
+      dog: dog,
+      email: email,
+      id: id,
     })
   }
 
@@ -62,6 +65,12 @@ class ListItem extends React.Component {
 
   handleSave = () => {
     const {handler, dog, email, id} = this.state
+    const {
+      DID_NOT_SUCCEED_EDITING,
+      INVALID_HANDLER,
+      INVALID_DOG,
+      INVALID_EMAIL,
+    } = ERROR_MESSAGE
 
     if (this.isValid()) {
       store.editItem({
@@ -78,10 +87,10 @@ class ListItem extends React.Component {
       })
     } else {
       const newErrorMessage =
-        store.errorMessage.didNotSucceedEditing +
-        (!isHandlerValid(handler) ? store.errorMessage.invalidHandler : '') +
-        (!isDogValid(dog) ? store.errorMessage.invalidDog : '') +
-        (!isEmailValid(email) ? store.errorMessage.invalidEmail : '')
+        DID_NOT_SUCCEED_EDITING +
+        (!isHandlerValid(handler) ? INVALID_HANDLER : '') +
+        (!isDogValid(dog) ? INVALID_DOG : '') +
+        (!isEmailValid(email) ? INVALID_EMAIL : '')
 
       this.setState({
         error: true,
@@ -105,6 +114,7 @@ class ListItem extends React.Component {
       error,
       errorMessageWhole,
     } = this.state
+    const {handleChange, handleCancel, handleSave, changeEditMode} = this
 
     return windowWidth >= 767 ? (
       <ListItemDesktop
@@ -115,10 +125,10 @@ class ListItem extends React.Component {
         isInEditMode={isInEditMode}
         error={error}
         errorMessageWhole={errorMessageWhole}
-        handleChange={this.handleChange}
-        handleCancel={this.handleCancel}
-        handleSave={this.handleSave}
-        changeEditMode={this.changeEditMode}
+        handleChange={handleChange}
+        handleCancel={handleCancel}
+        handleSave={handleSave}
+        changeEditMode={changeEditMode}
       />
     ) : (
       <ListItemMobile
@@ -129,10 +139,10 @@ class ListItem extends React.Component {
         isInEditMode={isInEditMode}
         error={error}
         errorMessageWhole={errorMessageWhole}
-        handleChange={this.handleChange}
-        handleCancel={this.handleCancel}
-        handleSave={this.handleSave}
-        changeEditMode={this.changeEditMode}
+        handleChange={handleChange}
+        handleCancel={handleCancel}
+        handleSave={handleSave}
+        changeEditMode={changeEditMode}
       />
     )
   }

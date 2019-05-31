@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-import image from './dog-1.jpg'
+import image from '../../assets/dog-1.jpg'
 import DetermineClass from '../DetermineClass/DetermineClass'
 import {ROUTES} from '../../constants'
 

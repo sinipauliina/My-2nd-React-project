@@ -13,8 +13,7 @@ class Header extends React.Component {
   }
 
   handleClick = () => {
-    const currentMobileMenuState = !this.state.mobileMenu
-    this.setState({mobileMenu: currentMobileMenuState})
+    this.setState({mobileMenu: !this.state.mobileMenu})
   }
 
   handleClickLink = () => {
@@ -23,27 +22,28 @@ class Header extends React.Component {
 
   render() {
     const {mobileMenu} = this.state
+    const {handleClickLink, handleClick} = this
 
     return (
       <header className="App-header">
         <div className="header-container">
           <div className="sitename">
-            <Link to="/" onClick={this.handleClickLink}>
+            <Link to="/" onClick={handleClickLink}>
               Touhutassut
             </Link>
           </div>
-          <div className="toggle-button" onClick={this.handleClick}>
+          <div className="toggle-button" onClick={handleClick}>
             <span className="fas fa-bars" />
           </div>
           <nav className={mobileMenu ? 'mobilemenu' : 'mainmenu'}>
             <ul>
               <li>
-                <Link to="/" onClick={this.handleClickLink}>
+                <Link to="/" onClick={handleClickLink}>
                   <span className="fas fa-home" />
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.PARTICIPANTS} onClick={this.handleClickLink}>
+                <Link to={ROUTES.PARTICIPANTS} onClick={handleClickLink}>
                   Ilmoittautuminen
                 </Link>
               </li>
