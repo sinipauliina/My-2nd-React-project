@@ -24,19 +24,18 @@ This is a single-page app developed with React. The app is a site for an imagina
 - The user can sort the lists by clicking on any column header.
 
 ### Structure
-index.js  
-- App.js  
-  - Header.js  
-  - Home.js  
-    - DetermineClass.js  
-      - DisplayAnswer.js  
-  - Participants.js  
-    - AddNewItem.js    
-    - List.js  
-      - ListItem.js  
-        - ListItemDesktop.js  
-        - ListItemMobile.js  
-  - Footer.js  
+index.js -> App.js  
+- Header.js  
+- Home.js  
+  - DetermineClass.js  
+    - DisplayAnswer.js  
+- Participants.js  
+  - AddNewItem.js    
+  - List.js  
+    - ListItem.js  
+      - ListItemDesktop.js  
+      - ListItemMobile.js  
+- Footer.js  
 
 ### The developer
 
