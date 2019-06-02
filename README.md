@@ -6,6 +6,10 @@
 
 This is a single-page app developed with React. The app is a site for an imaginary dog club that is going to organize an agility competition. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Live demo
+
+Check the app out on Heroku: https://my-2nd-react-project.herokuapp.com/
+
 ### Features
 
 - The app contains two "pages": a home page and a page for entering the competition ("Ilmoittautuminen").
