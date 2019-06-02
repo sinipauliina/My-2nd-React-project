@@ -8,7 +8,7 @@ This is a single-page app developed with React. The app is a site for an imagina
 
 ### Live demo
 
-Check the app out on Heroku: <a href="https://my-2nd-react-project.herokuapp.com/" target="_blank">https://my-2nd-react-project.herokuapp.com/</a>
+Check the app out on Heroku: https://my-2nd-react-project.herokuapp.com/
 
 ### Features
 
